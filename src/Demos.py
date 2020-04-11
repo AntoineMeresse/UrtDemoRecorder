@@ -1,9 +1,20 @@
-class Demos():
+from os import listdir
+from os.path import isdir, sep
+
+class Demos:
 
     def __init__(self, path):
         self.path = path
+        self.pathQ3UT4 = path+sep+"q3ut4"
+        self.pathDemos = self.pathQ3UT4+sep+"demos"
         self.demosList = list()
-        self.format = ".demo"
+        self.format = ".dm_68"
+
+    def initDemosList(self):
+        if isdir(self.pathDemos):
+            for elem in listdir(self.pathDemos):
+                if self.format in elem:
+                    self.demosList.append(elem)
 
     def getInfos(self):
         print("\n=========================================================")

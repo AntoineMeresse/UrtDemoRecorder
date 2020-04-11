@@ -1,7 +1,10 @@
 from src.Demos import Demos
+# "C:\Logiciels\UrbanTerror43"
 
 def main():
-    d = Demos("test")
+    d = Demos("C:\\Logiciels\\UrbanTerror43")
+
+    print(d.initDemosList())
     d.getInfos()
 
 
