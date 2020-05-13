@@ -9,8 +9,14 @@ class Demos:
         self.pathDemos = self.pathQ3UT4+sep+"demos"
         self.demosList = list()
         self.format = ".dm_68"
+        self.initDemosList()
+
+    def changeFormat(self, format):
+        if format in [".demo", ".dm_68"]:
+            self.format = format
 
     def initDemosList(self):
+        self.demosList = list()
         if isdir(self.pathDemos):
             for elem in listdir(self.pathDemos):
                 if self.format in elem:
