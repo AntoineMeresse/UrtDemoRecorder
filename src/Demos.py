@@ -8,7 +8,6 @@ class Demos:
         self.urban = path
         tmp = path.split("/")
         self.path = sep.join(tmp[0:len(tmp)-1])
-        print(self.path)
         self.pathQ3UT4 = self.path+sep+"q3ut4"
         self.pathDemos = self.pathQ3UT4+sep+"demos"
         self.demosList = list()

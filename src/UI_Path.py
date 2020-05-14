@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from src.UI_DemoRecorder import DemoRecorder
 
+
 class Path(QMainWindow):
 
     def __init__(self):

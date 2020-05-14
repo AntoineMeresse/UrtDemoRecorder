@@ -3,16 +3,17 @@ from PyQt5 import QtCore
 from src.Demos import Demos
 from src.Window import DemosList
 
+
 class DemoRecorder(QMainWindow):
 
-    def __init__(self, path, format):
+    def __init__(self, path, fmt):
         super().__init__()
         self.setWindowTitle("Urban Terror DemoRecorder")
         self.setGeometry(0, 0, 800, 500)
 
         # Datas
         d = Demos(path)
-        d.changeFormat(format)
+        d.changeFormat(fmt)
         self.demosLst = DemosList(d.demosList)
 
         #######################################################
