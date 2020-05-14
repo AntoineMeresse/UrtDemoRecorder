@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QScrollArea, QToolBar, QPushButton, QSpinBox
 from PyQt5 import QtCore
 from src.Demos import Demos
-from src.Window import DemosList
+from src.DemosList import DemosList
 
 
 class DemoRecorder(QMainWindow):

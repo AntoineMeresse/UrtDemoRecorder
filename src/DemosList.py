@@ -20,6 +20,7 @@ class DemosList(QWidget):
         self.setLayout(self.grid)
 
     def getDemosChecked(self):
+        self.demosChecked = list()
         for i, v in enumerate(self.demosList):
             if v.checkState():
                 self.demosChecked.append(self.lstCpy[i])

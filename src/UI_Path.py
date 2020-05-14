@@ -51,7 +51,7 @@ class Path(QMainWindow):
 
     def initSubmitButton(self):
         self.submit = QPushButton()
-        self.submit.setText("THIS IS A BUTTON")
+        self.submit.setText("Next")
         self.submit.clicked.connect(self.demoWindow)
 
         self.layout.addWidget(self.submit)
