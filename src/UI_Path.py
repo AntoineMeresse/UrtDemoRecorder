@@ -43,8 +43,8 @@ class Path(QMainWindow):
 
     def initDemosFormat(self):
         self.combo = QComboBox(self)
-        self.combo.addItem("urtdemo")
-        self.combo.addItem("demo_68")
+        self.combo.addItem(".urtdemo")
+        self.combo.addItem(".dm_68")
 
         self.layout.addWidget(self.combo)
 
@@ -57,9 +57,7 @@ class Path(QMainWindow):
 
     def demoWindow(self):
         if self.path != "":
-            print(self.path)
-            print(self.combo.currentText())
-            self.dr = DemoRecorder()
+            self.dr = DemoRecorder(self.path,self.combo.currentText())
             self.dr.show()
             self.close()
         else:

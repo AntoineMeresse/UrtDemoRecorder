@@ -5,20 +5,18 @@ from src.Window import DemosList
 
 class DemoRecorder(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, path, format):
         super().__init__()
         self.setWindowTitle("Urban Terror DemoRecorder")
         self.setGeometry(0, 0, 800, 500)
 
-        self.path = ""
-
         # Datas
-        d = Demos("C:\\Logiciels\\UrbanTerror43")
+        d = Demos(path)
+        d.changeFormat(format)
         self.demosLst = DemosList(d.demosList)
 
         #######################################################
         # ToolBar
-
         # Gun
         self.toolbar = QToolBar("Gun Properties")
         self.addToolBar(QtCore.Qt.BottomToolBarArea, self.toolbar)
@@ -81,7 +79,7 @@ class DemoRecorder(QMainWindow):
     def initRecordButton(self):
         self.record = QPushButton()
         self.record.setText("Record")
-        self.record.clicked.connect(self.demosLst.getDemosChecked) # Change Function
+        self.record.clicked.connect(self.demosLst.getDemosChecked)  # Change Function
         self.toolbar.addWidget(self.record)
 
     def void(self):
