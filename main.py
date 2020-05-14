@@ -15,7 +15,7 @@ class DemoRecorder(QMainWindow):
 
         # Datas
         d = Demos("C:\\Logiciels\\UrbanTerror43")
-        demosLst = DemosList(d.demosList)
+        self.demosLst = DemosList(d.demosList)
 
         #######################################################
         # ToolBar
@@ -42,7 +42,7 @@ class DemoRecorder(QMainWindow):
         #######################################################
         # Scroll Area
         self.sArea = QScrollArea()
-        self.sArea.setWidget(demosLst)
+        self.sArea.setWidget(self.demosLst)
 
         #######################################################
         # Main
@@ -88,7 +88,7 @@ class DemoRecorder(QMainWindow):
     def initRecordButton(self):
         self.record = QPushButton()
         self.record.setText("Record")
-        self.record.clicked.connect(self.void) # Change Function
+        self.record.clicked.connect(self.demosLst.getDemosChecked) # Change Function
         self.toolbar.addWidget(self.record)
 
     def initPath(self):
