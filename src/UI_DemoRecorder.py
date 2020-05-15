@@ -26,9 +26,13 @@ class DemoRecorder(QMainWindow):
         self.initGunX()
         self.initGunY()
         self.initGunZ()
-
         self.initFov()
 
+        # Button
+        self.toolbar2 = QToolBar("Buttons")
+        self.addToolBar(QtCore.Qt.TopToolBarArea, self.toolbar2)
+
+        self.initSelectAllButtons()
         self.initRecordButton()
 
         #######################################################
@@ -81,7 +85,18 @@ class DemoRecorder(QMainWindow):
         self.record = QPushButton()
         self.record.setText("Record")
         self.record.clicked.connect(self.demosLst.getDemosChecked)  # Change Function
-        self.toolbar.addWidget(self.record)
+        self.toolbar2.addWidget(self.record)
+
+    def initSelectAllButtons(self):
+        self.unselectall = QPushButton()
+        self.unselectall.setText("Unselect All")
+        self.unselectall.clicked.connect(self.demosLst.unselectAll)
+        self.toolbar2.addWidget(self.unselectall)
+
+        self.selectall = QPushButton()
+        self.selectall.setText("Select All")
+        self.selectall.clicked.connect(self.demosLst.selectAll)
+        self.toolbar2.addWidget(self.selectall)
 
     def void(self):
         print("Print void")

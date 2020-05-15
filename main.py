@@ -1,11 +1,12 @@
 from PyQt5.QtWidgets import *
 from src.UI_Path import Path
+from src.UI_DemoRecorder import DemoRecorder
 import sys
 
 
 def main(args):
     app = QApplication(args)
-    window = Path()
+    window = DemoRecorder("C:/Logiciels/UrbanTerror43/Quake3-UrT.exe", ".urtdemo")
     window.show()
     app.exec_()
 
