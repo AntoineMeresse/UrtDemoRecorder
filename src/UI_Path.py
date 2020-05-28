@@ -26,7 +26,7 @@ class Path(QMainWindow):
 
     def initPath(self):
         self.game = QLineEdit(self)
-        self.game.setText("Path of UrbanTerror")
+        self.game.setText("---> Path of UrbanTerror Executable (Put your own)")
         self.gameB = QPushButton()
         self.gameB.setText("Change path")
         self.gameB.clicked.connect(self.gamePath)
@@ -38,7 +38,7 @@ class Path(QMainWindow):
         self.layout.addLayout(layout2)
 
     def gamePath(self):
-        tmp = str(QFileDialog.getOpenFileName(self))
+        tmp = str(QFileDialog.getOpenFileName(self, "Open executable", "", "Executable (*.exe)"))
         self.path = tmp.split("'")[1]
         self.game.setText(self.path)
 
