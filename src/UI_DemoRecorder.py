@@ -81,10 +81,20 @@ class DemoRecorder(QMainWindow):
         self.fov.setPrefix(" DemoFov : ")
         self.toolbar.addWidget(self.fov)
 
+    def recordAction(self):
+        res = dict()
+        res["demosList"] = self.demosLst.getDemosChecked()
+        res["cg_gunSize"] = self.guns.text()
+        res["cg_gunx"] = self.gunx.text()
+        res["cg_guny"] = self.guny.text()
+        res["cg_gunz"] = self.gunz.text()
+        res["fov"] = self.fov.text()
+        print(res)
+
     def initRecordButton(self):
         self.record = QPushButton()
         self.record.setText("Record")
-        self.record.clicked.connect(self.demosLst.getDemosChecked)  # Change Function
+        self.record.clicked.connect(self.recordAction)  # Change Function
         self.toolbar2.addWidget(self.record)
 
     def initSelectAllButtons(self):

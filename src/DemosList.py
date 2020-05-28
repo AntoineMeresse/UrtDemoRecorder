@@ -24,7 +24,7 @@ class DemosList(QWidget):
         for i, v in enumerate(self.demosList):
             if v.checkState():
                 self.demosChecked.append(self.lstCpy[i])
-        print(self.demosChecked)
+        return self.demosChecked
 
     def selectAll(self):
         for i, v in enumerate(self.demosList):
