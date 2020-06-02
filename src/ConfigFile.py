@@ -3,7 +3,7 @@ import os
 
 class ConfigFile:
 
-    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov):
+    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate):
         self.urtpath = urtpath
         self.dirpath = dirpath
         self.demosLst = demosLst
@@ -12,6 +12,7 @@ class ConfigFile:
         self.gunY = gunY
         self.gunZ = gunZ
         self.fov = fov
+        self.framerate = framerate
 
         self.createConfigFile()
         self.execConfigFile()
@@ -31,8 +32,8 @@ class ConfigFile:
             fl.write(str.format('seta demo{} "demo {}; quit"', len(self.demosLst), self.demosLst[0]))
 
     def getParams(self):
-        return(str.format("cg_gunsize {}; cg_gunx {}; cg_guny {}; cg_gunz {}; cg_demofov {}",
-               self.gunSize, self.gunX, self.gunY, self.gunZ, self.fov))
+        return(str.format("cg_gunsize {}; cg_gunx {}; cg_guny {}; cg_gunz {}; cg_demofov {}; cl_aviFrameRate {}",
+               self.gunSize, self.gunX, self.gunY, self.gunZ, self.fov, self.framerate))
 
     def execConfigFile(self):
         executable = self.urtpath.split(os.sep)[-1]

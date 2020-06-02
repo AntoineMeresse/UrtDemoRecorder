@@ -28,6 +28,7 @@ class DemoRecorder(QMainWindow):
         self.initGunY()
         self.initGunZ()
         self.initFov()
+        self.initFrameRate()
 
         # Button
         self.toolbar2 = QToolBar("Buttons")
@@ -82,9 +83,17 @@ class DemoRecorder(QMainWindow):
         self.fov.setPrefix(" DemoFov : ")
         self.toolbar.addWidget(self.fov)
 
+    def initFrameRate(self):
+        self.framerate = QSpinBox(self)
+        self.framerate.setMinimum(0)
+        self.framerate.setMaximum(250)
+        self.framerate.setValue(25)
+        self.framerate.setPrefix(" FrameRate : ")
+        self.toolbar.addWidget(self.framerate)
+
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText())
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText())
 
     def initRecordButton(self):
         self.record = QPushButton()
