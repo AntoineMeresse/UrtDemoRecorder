@@ -83,7 +83,7 @@ class DemoRecorder(QMainWindow):
         self.toolbar.addWidget(self.fov)
 
     def recordAction(self):
-        ConfigFile(self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
+        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
                    self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText())
 
     def initRecordButton(self):
