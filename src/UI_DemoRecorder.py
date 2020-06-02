@@ -84,11 +84,11 @@ class DemoRecorder(QMainWindow):
     def recordAction(self):
         res = dict()
         res["demosList"] = self.demosLst.getDemosChecked()
-        res["cg_gunSize"] = self.guns.text()
-        res["cg_gunx"] = self.gunx.text()
-        res["cg_guny"] = self.guny.text()
-        res["cg_gunz"] = self.gunz.text()
-        res["fov"] = self.fov.text()
+        res["cg_gunSize"] = self.guns.cleanText()
+        res["cg_gunx"] = self.gunx.cleanText()
+        res["cg_guny"] = self.guny.cleanText()
+        res["cg_gunz"] = self.gunz.cleanText()
+        res["fov"] = self.fov.cleanText()
         print(res)
 
     def initRecordButton(self):
