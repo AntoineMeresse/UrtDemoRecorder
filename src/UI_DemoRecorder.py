@@ -13,9 +13,9 @@ class DemoRecorder(QMainWindow):
         self.setGeometry(0, 0, 800, 500)
 
         # Datas
-        d = Demos(path)
-        d.changeFormat(fmt)
-        self.demosLst = DemosList(d.demosList)
+        self.demos = Demos(path)
+        self.demos.changeFormat(fmt)
+        self.demosLst = DemosList(self.demos.demosList)
 
         #######################################################
         # ToolBar
@@ -83,8 +83,8 @@ class DemoRecorder(QMainWindow):
         self.toolbar.addWidget(self.fov)
 
     def recordAction(self):
-        cf = ConfigFile(self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                        self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText())
+        ConfigFile(self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText())
 
     def initRecordButton(self):
         self.record = QPushButton()
