@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QScrollArea, QToolBar, QPushButton, QSp
 from PyQt5 import QtCore
 from src.Demos import Demos
 from src.DemosList import DemosList
+from src.ConfigFile import ConfigFile
 
 
 class DemoRecorder(QMainWindow):
@@ -82,14 +83,8 @@ class DemoRecorder(QMainWindow):
         self.toolbar.addWidget(self.fov)
 
     def recordAction(self):
-        res = dict()
-        res["demosList"] = self.demosLst.getDemosChecked()
-        res["cg_gunSize"] = self.guns.cleanText()
-        res["cg_gunx"] = self.gunx.cleanText()
-        res["cg_guny"] = self.guny.cleanText()
-        res["cg_gunz"] = self.gunz.cleanText()
-        res["fov"] = self.fov.cleanText()
-        print(res)
+        cf = ConfigFile(self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
+                        self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText())
 
     def initRecordButton(self):
         self.record = QPushButton()
