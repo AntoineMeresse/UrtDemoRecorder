@@ -19,9 +19,9 @@ class ConfigFile:
         Function to create the config file (.cfg)
         :param path: a path
         """
-        filepath = self.path + os.sep + "q3ut4" + os.sep + "demoRecorder.cfg"
+        filepath = self.path + os.sep + "q3ut4" + os.sep + "demorecorder.cfg"
         with open(filepath, "w+") as fl:
-            fl.write("Test")
+            fl.write(filepath)
 
     def toString(self):
         """
