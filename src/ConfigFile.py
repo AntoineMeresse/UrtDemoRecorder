@@ -35,7 +35,8 @@ class ConfigFile:
                self.gunSize, self.gunX, self.gunY, self.gunZ, self.fov))
 
     def execConfigFile(self):
-        cmd = self.urtpath + " + exec demorecorder.cfg + vstr demo0"
+        executable = self.urtpath.split(os.sep)[-1]
+        cmd = str.format("cd {} && {} + exec demorecorder.cfg + vstr demo0",self.dirpath,executable)
         os.system(cmd)
 
     def toString(self):

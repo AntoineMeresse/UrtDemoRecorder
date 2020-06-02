@@ -5,8 +5,8 @@ from os.path import isdir, sep
 class Demos:
 
     def __init__(self, path):
-        self.urban = path
         tmp = path.split("/")
+        self.urban = sep.join(tmp)
         self.path = sep.join(tmp[0:len(tmp)-1])
         self.pathQ3UT4 = self.path+sep+"q3ut4"
         self.pathDemos = self.pathQ3UT4+sep+"demos"
