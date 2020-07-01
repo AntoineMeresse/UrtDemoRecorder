@@ -3,7 +3,7 @@ import os
 
 class ConfigFile:
 
-    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate):
+    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord):
         self.urtpath = urtpath
         self.dirpath = dirpath
         self.demosLst = demosLst
@@ -13,6 +13,7 @@ class ConfigFile:
         self.gunZ = gunZ
         self.fov = fov
         self.framerate = framerate
+        self.toberecord = toBeRecord
 
         self.createConfigFile()
         self.execConfigFile()
@@ -26,8 +27,12 @@ class ConfigFile:
         with open(filepath, "w+") as fl:
             for i in range(0, len(self.demosLst)):
                 demosName = self.demosLst[i].split(".")[0]
-                line = str.format('seta demo{} "set nextdemo vstr demo{}; demo {}; {} ; video {}"\n',
-                                  i, i+1, demosName, self.getParams(), demosName)
+                line = str.format('seta demo{} "set nextdemo vstr demo{}; demo {}; {}',
+                                  i, i+1, demosName, self.getParams())
+                if self.toberecord:
+                    line += str.format('; video {}"\n', demosName)
+                else:
+                    line += '"\n'
                 fl.write(line)
             fl.write(str.format('seta demo{} "demo {}; quit"', len(self.demosLst), self.demosLst[0]))
 

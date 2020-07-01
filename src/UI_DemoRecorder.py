@@ -36,6 +36,7 @@ class DemoRecorder(QMainWindow):
 
         self.initSelectAllButtons()
         self.initRecordButton()
+        self.initPlayDemosButton()
 
         #######################################################
         # Scroll Area
@@ -93,7 +94,11 @@ class DemoRecorder(QMainWindow):
 
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText())
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True)
+
+    def playAction(self):
+        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False)
 
     def initRecordButton(self):
         self.record = QPushButton()
@@ -111,6 +116,12 @@ class DemoRecorder(QMainWindow):
         self.selectall.setText("Select All")
         self.selectall.clicked.connect(self.demosLst.selectAll)
         self.toolbar2.addWidget(self.selectall)
+
+    def initPlayDemosButton(self):
+        self.play = QPushButton()
+        self.play.setText("Play Demo(s)")
+        self.play.clicked.connect(self.playAction)
+        self.toolbar2.addWidget(self.play)
 
     def void(self):
         print("Print void")

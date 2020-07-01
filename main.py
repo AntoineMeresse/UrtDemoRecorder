@@ -6,8 +6,8 @@ import sys
 
 def main(args):
     app = QApplication(args)
-    #window = DemoRecorder("C:/Logiciels/UrbanTerror43/Quake3-UrT.exe", ".urtdemo")
-    window = Path()
+    window = DemoRecorder("C:/Logiciels/UrbanTerror43/Quake3-UrT.exe", ".urtdemo")
+    #window = Path()
     window.show()
     app.exec_()
 
