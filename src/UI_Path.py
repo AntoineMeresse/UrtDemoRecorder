@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from src.UI_DemoRecorder import DemoRecorder
+from src.settings import Settings
 
 
 class Path(QMainWindow):
@@ -9,6 +10,8 @@ class Path(QMainWindow):
 
         self.setWindowTitle("Urban Terror DemoRecorder")
         self.setGeometry(0, 0, 500, 200)
+
+        self.settings = Settings()
 
         self.path = ""
         self.format = ""
@@ -26,7 +29,12 @@ class Path(QMainWindow):
 
     def initPath(self):
         self.game = QLineEdit(self)
-        self.game.setText("---> Path of UrbanTerror Executable (Put your own)")
+        path_tmp = self.settings.getPath()
+        if path_tmp == "":
+            self.game.setText("---> Path of UrbanTerror Executable (Put your own)")
+        else:
+            self.path = path_tmp
+            self.game.setText(path_tmp)
         self.gameB = QPushButton()
         self.gameB.setText("Change path")
         self.gameB.clicked.connect(self.gamePath)
@@ -44,9 +52,12 @@ class Path(QMainWindow):
 
     def initDemosFormat(self):
         self.combo = QComboBox(self)
-        self.combo.addItem(".urtdemo")
-        self.combo.addItem(".dm_68")
-
+        if self.settings.getDemoType() == '.urtdemo':
+            self.combo.addItem(".urtdemo")
+            self.combo.addItem(".dm_68")
+        else:
+            self.combo.addItem(".dm_68")
+            self.combo.addItem(".urtdemo")
         self.layout.addWidget(self.combo)
 
     def initSubmitButton(self):
@@ -56,9 +67,15 @@ class Path(QMainWindow):
 
         self.layout.addWidget(self.submit)
 
+    def updateSettings(self):
+        self.settings.savePath(self.path)
+        self.settings.saveDemoFormat(self.combo.currentText())
+        self.settings.writeInJsonFile()
+
     def demoWindow(self):
         if self.path != "":
-            self.dr = DemoRecorder(self.path,self.combo.currentText())
+            self.updateSettings()
+            self.dr = DemoRecorder(self.path, self.combo.currentText())
             self.dr.show()
             self.close()
         else:

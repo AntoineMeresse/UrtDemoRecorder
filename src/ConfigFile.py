@@ -26,11 +26,11 @@ class ConfigFile:
         filepath = self.dirpath + os.sep + "q3ut4" + os.sep + "demorecorder.cfg"
         with open(filepath, "w+") as fl:
             for i in range(0, len(self.demosLst)):
-                demosName = self.demosLst[i].split(".")[0]
+                demo = self.demosLst[i]
                 line = str.format('seta demo{} "set nextdemo vstr demo{}; demo {}; {}',
-                                  i, i+1, demosName, self.getParams())
+                                  i, i+1, demo, self.getParams())
                 if self.toberecord:
-                    line += str.format('; video {}"\n', demosName)
+                    line += str.format('; video {}"\n', demo.split(".")[0])
                 else:
                     line += '"\n'
                 fl.write(line)
@@ -42,7 +42,9 @@ class ConfigFile:
 
     def execConfigFile(self):
         executable = self.urtpath.split(os.sep)[-1]
-        cmd = str.format("cd {} && {} + exec demorecorder.cfg + vstr demo0",self.dirpath,executable)
+        cmd = str.format("cd /d {} && {} + exec demorecorder.cfg + vstr demo0", self.dirpath, executable)
+        #cmd = str.format("{}/{} + exec demorecorder.cfg + vstr demo0", self.dirpath, executable)
+        print(cmd)
         os.system(cmd)
 
     def toString(self):
