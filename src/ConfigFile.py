@@ -1,9 +1,11 @@
 import os
 
+from src.settings import Settings
+
 
 class ConfigFile:
 
-    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord):
+    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord, hideHUD ,settings : Settings):
         self.urtpath = urtpath
         self.dirpath = dirpath
         self.demosLst = demosLst
@@ -14,6 +16,8 @@ class ConfigFile:
         self.fov = fov
         self.framerate = framerate
         self.toberecord = toBeRecord
+        self.hideHUD = hideHUD
+        self.settings = settings
 
         self.createConfigFile()
         self.execConfigFile()
@@ -25,6 +29,10 @@ class ConfigFile:
         """
         filepath = self.dirpath + os.sep + "q3ut4" + os.sep + "demorecorder.cfg"
         with open(filepath, "w+") as fl:
+            if (self.settings.getCustomSetttings() != ""):
+                fl.write(self.settings.getCustomSetttings()+"\n")
+            if self.hideHUD:
+                fl.write("{}\n".format(self.settings.getHideHud()))
             for i in range(0, len(self.demosLst)):
                 demo = self.demosLst[i]
                 line = str.format('seta demo{} "set nextdemo vstr demo{}; demo {}; {}',
@@ -34,7 +42,7 @@ class ConfigFile:
                 else:
                     line += '"\n'
                 fl.write(line)
-            fl.write(str.format('seta demo{} "demo {}; quit"', len(self.demosLst), self.demosLst[0]))
+            fl.write(str.format('seta demo{} "demo {}; {} quit"', len(self.demosLst), self.demosLst[0], self.settings.getShowHud()))
 
     def getParams(self):
         return(str.format("cg_gunsize {}; cg_gunx {}; cg_guny {}; cg_gunz {}; cg_demofov {}; cl_aviFrameRate {}",

@@ -75,7 +75,7 @@ class Path(QMainWindow):
     def demoWindow(self):
         if self.path != "":
             self.updateSettings()
-            self.dr = DemoRecorder(self.path, self.combo.currentText())
+            self.dr = DemoRecorder(self.path, self.combo.currentText(), self.settings)
             self.dr.show()
             self.close()
         else:

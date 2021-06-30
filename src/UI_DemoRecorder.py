@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QScrollArea, QToolBar, QPushButton, QSpinBox
+from PyQt5.QtWidgets import QCheckBox, QMainWindow, QScrollArea, QToolBar, QPushButton, QSpinBox
 from PyQt5 import QtCore
 from src.Demos import Demos
 from src.DemosList import DemosList
@@ -7,10 +7,11 @@ from src.ConfigFile import ConfigFile
 
 class DemoRecorder(QMainWindow):
 
-    def __init__(self, path, fmt):
+    def __init__(self, path, fmt, settings):
         super().__init__()
         self.setWindowTitle("Urban Terror DemoRecorder")
         self.setGeometry(0, 0, 800, 500)
+        self.settings = settings
 
         # Datas
         self.demos = Demos(path)
@@ -29,6 +30,7 @@ class DemoRecorder(QMainWindow):
         self.initGunZ()
         self.initFov()
         self.initFrameRate()
+        self.initHideHud()
 
         # Button
         self.toolbar2 = QToolBar("Buttons")
@@ -92,13 +94,25 @@ class DemoRecorder(QMainWindow):
         self.framerate.setPrefix(" FrameRate : ")
         self.toolbar.addWidget(self.framerate)
 
+    def initHideHud(self):
+        self.hud = QCheckBox()
+        self.hud.setText("Hide Hud")
+        self.hud.setStyleSheet("QCheckBox"
+                               "{"
+                               "padding : 3px;"
+                               "}")
+        self.toolbar.addWidget(self.hud)
+
+    def isHudChecked(self):
+        return True if self.hud.checkState() else False
+
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True)
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True, self.isHudChecked(), self.settings)
 
     def playAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False)
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False, self.isHudChecked(), self.settings)
 
     def initRecordButton(self):
         self.record = QPushButton()
