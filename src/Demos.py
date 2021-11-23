@@ -15,7 +15,7 @@ class Demos:
         self.initDemosList()
 
     def changeFormat(self, format):
-        if format in [".urtdemo", ".dm_68"]:
+        if format in [".urtdemo", ".dm_68", ".urtdemo & .dm_68"]:
             self.format = format
             self.initDemosList()
 
@@ -23,7 +23,8 @@ class Demos:
         self.demosList = list()
         if isdir(self.pathDemos):
             for elem in listdir(self.pathDemos):
-                if self.format in elem:
+                elemSplit = elem.split(".")
+                if elemSplit[-1] in self.format:
                     self.demosList.append(elem)
 
     def getInfos(self):

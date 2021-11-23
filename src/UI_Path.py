@@ -55,7 +55,13 @@ class Path(QMainWindow):
         if self.settings.getDemoType() == '.urtdemo':
             self.combo.addItem(".urtdemo")
             self.combo.addItem(".dm_68")
+            self.combo.addItem(".urtdemo & .dm_68")
+        elif self.settings.getDemoType() == '.dm_68':
+            self.combo.addItem(".dm_68")
+            self.combo.addItem(".urtdemo")
+            self.combo.addItem(".urtdemo & .dm_68")
         else:
+            self.combo.addItem(".urtdemo & .dm_68")
             self.combo.addItem(".dm_68")
             self.combo.addItem(".urtdemo")
         self.layout.addWidget(self.combo)

@@ -100,8 +100,17 @@ class DemoRecorder(QMainWindow):
         self.hud.setStyleSheet(checkbox_style)
         self.toolbar.addWidget(self.hud)
 
+    def initNoParams(self):
+        self.a_override = QCheckBox()
+        self.a_override.setText("Avoid Override")
+        self.a_override.setStyleSheet(checkbox_style)
+        self.toolbar.addWidget(self.a_override)
+
     def isHudChecked(self):
         return True if self.hud.checkState() else False
+
+    def isAvoidOverrideChecked(self):
+        return True if self.a_override.checkState() else False
 
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
