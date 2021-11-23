@@ -1,7 +1,0 @@
-{
-    "path": "E:/Games/UrbanTerror43/quake3e-urt-cgaz.x64.exe",
-    "demotype": ".urtdemo & .dm_68",
-    "hideHUD": "cg_msgtime 0; cg_chattime 0; cg_draw2d 0; cl_drawangle 0;",
-    "showHUD": "cg_msgtime 6000; cg_chattime 5000; cg_draw2d 1;",
-    "customSettings": ""
-}

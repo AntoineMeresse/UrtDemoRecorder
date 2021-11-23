@@ -31,6 +31,7 @@ class DemoRecorder(QMainWindow):
         self.initFov()
         self.initFrameRate()
         self.initHideHud()
+        self.initNoParams() # avoid to override player config if checked
 
         # Button
         self.toolbar2 = QToolBar("Buttons")
@@ -114,11 +115,13 @@ class DemoRecorder(QMainWindow):
 
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True, self.isHudChecked(), self.settings)
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True, self.isHudChecked(), self.settings,
+                   self.isAvoidOverrideChecked())
 
     def playAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False, self.isHudChecked(), self.settings)
+                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False, self.isHudChecked(), self.settings,
+                   self.isAvoidOverrideChecked())
 
     def initRecordButton(self):
         self.record = QPushButton()

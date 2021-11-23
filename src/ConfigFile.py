@@ -5,7 +5,7 @@ from src.settings import Settings
 
 class ConfigFile:
 
-    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord, hideHUD ,settings : Settings):
+    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord, hideHUD ,settings : Settings, avoidOverride):
         self.urtpath = urtpath
         self.dirpath = dirpath
         self.demosLst = demosLst
@@ -18,6 +18,7 @@ class ConfigFile:
         self.toberecord = toBeRecord
         self.hideHUD = hideHUD
         self.settings = settings
+        self.avoidOverride = avoidOverride
 
         self.createConfigFile()
         self.execConfigFile()
@@ -44,7 +45,9 @@ class ConfigFile:
                 fl.write(line)
             fl.write(str.format('seta demo{} "demo {}; {} quit"', len(self.demosLst), self.demosLst[0], self.settings.getShowHud()))
 
-    def getParams(self):
+    def getParams(self) -> str:
+        if (self.avoidOverride):
+            return "";
         return(str.format("cg_gunsize {}; cg_gunx {}; cg_guny {}; cg_gunz {}; cg_demofov {}; cl_aviFrameRate {}",
                self.gunSize, self.gunX, self.gunY, self.gunZ, self.fov, self.framerate))
 
