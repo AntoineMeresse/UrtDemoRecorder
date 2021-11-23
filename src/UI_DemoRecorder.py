@@ -3,7 +3,7 @@ from PyQt5 import QtCore
 from src.Demos import Demos
 from src.DemosList import DemosList
 from src.ConfigFile import ConfigFile
-
+from src.style import checkbox_style
 
 class DemoRecorder(QMainWindow):
 
@@ -97,10 +97,7 @@ class DemoRecorder(QMainWindow):
     def initHideHud(self):
         self.hud = QCheckBox()
         self.hud.setText("Hide Hud")
-        self.hud.setStyleSheet("QCheckBox"
-                               "{"
-                               "padding : 3px;"
-                               "}")
+        self.hud.setStyleSheet(checkbox_style)
         self.toolbar.addWidget(self.hud)
 
     def isHudChecked(self):
