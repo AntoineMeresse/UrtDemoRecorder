@@ -32,6 +32,7 @@ class DemoRecorder(QMainWindow):
         self.initFrameRate()
         self.initHideHud()
         self.initNoParams() # avoid to override player config if checked
+        self.initVideoPipe()
 
         # Button
         self.toolbar2 = QToolBar("Buttons")
@@ -107,21 +108,30 @@ class DemoRecorder(QMainWindow):
         self.a_override.setStyleSheet(checkbox_style)
         self.toolbar.addWidget(self.a_override)
 
+    def initVideoPipe(self):
+        self.pipe = QCheckBox()
+        self.pipe.setText("video-pipe")
+        self.pipe.setStyleSheet(checkbox_style)
+        self.toolbar.addWidget(self.pipe)
+
     def isHudChecked(self):
         return True if self.hud.checkState() else False
 
     def isAvoidOverrideChecked(self):
         return True if self.a_override.checkState() else False
 
+    def isVideoPipeChecked(self):
+        return True if self.pipe.checkState() else False
+
     def recordAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
                    self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True, self.isHudChecked(), self.settings,
-                   self.isAvoidOverrideChecked())
+                   self.isAvoidOverrideChecked(), self.isVideoPipeChecked())
 
     def playAction(self):
         ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
                    self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False, self.isHudChecked(), self.settings,
-                   self.isAvoidOverrideChecked())
+                   self.isAvoidOverrideChecked(), False)
 
     def initRecordButton(self):
         self.record = QPushButton()

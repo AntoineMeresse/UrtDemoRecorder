@@ -5,7 +5,7 @@ from src.settings import Settings
 
 class ConfigFile:
 
-    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord, hideHUD ,settings : Settings, avoidOverride):
+    def __init__(self, urtpath, dirpath, demosLst, gunSize, gunX, gunY, gunZ, fov, framerate, toBeRecord, hideHUD ,settings : Settings, avoidOverride, videoPipe):
         self.urtpath = urtpath
         self.dirpath = dirpath
         self.demosLst = demosLst
@@ -19,6 +19,7 @@ class ConfigFile:
         self.hideHUD = hideHUD
         self.settings = settings
         self.avoidOverride = avoidOverride
+        self.videoPipe = videoPipe
 
         self.createConfigFile()
         self.execConfigFile()
@@ -39,7 +40,10 @@ class ConfigFile:
                 line = str.format('seta demo{} "set nextdemo vstr demo{}; demo {}; {}',
                                   i, i+1, demo, self.getParams())
                 if self.toberecord:
-                    line += str.format('; video {}"\n', demo.split(".")[0])
+                    if self.videoPipe:
+                        line += str.format('; video-pipe {}"\n', demo.split(".")[0])
+                    else:
+                         line += str.format('; video {}"\n', demo.split(".")[0])
                 else:
                     line += '"\n'
                 fl.write(line)
