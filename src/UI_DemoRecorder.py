@@ -3,7 +3,8 @@ from PyQt5 import QtCore
 from src.Demos import Demos
 from src.DemosList import DemosList
 from src.ConfigFile import ConfigFile
-from src.style import checkbox_style
+# from toolbars.style import checkbox_style
+from src.toolbars.SettingsToolbar import SettingsToolbar
 
 class DemoRecorder(QMainWindow):
 
@@ -20,19 +21,8 @@ class DemoRecorder(QMainWindow):
 
         #######################################################
         # ToolBar
-        # Gun
-        self.toolbar = QToolBar("Gun Properties")
-        self.addToolBar(QtCore.Qt.BottomToolBarArea, self.toolbar)
-
-        self.initGunSize()
-        self.initGunX()
-        self.initGunY()
-        self.initGunZ()
-        self.initFov()
-        self.initFrameRate()
-        self.initHideHud()
-        self.initNoParams() # avoid to override player config if checked
-        self.initVideoPipe()
+        self.settingsToolbar : SettingsToolbar = SettingsToolbar()
+        self.addToolBar(QtCore.Qt.LeftToolBarArea, self.settingsToolbar)
 
         # Button
         self.toolbar2 = QToolBar("Buttons")
@@ -51,87 +41,16 @@ class DemoRecorder(QMainWindow):
         # Main
         self.setCentralWidget(self.sArea)
 
-    def initGunSize(self):
-        self.guns = QSpinBox(self)
-        self.guns.setMinimum(0)
-        self.guns.setMaximum(1)
-        self.guns.setValue(0)
-        self.guns.setPrefix(" Gun Size : ")
-        self.toolbar.addWidget(self.guns)
-
-    def initGunX(self):
-        self.gunx = QSpinBox(self)
-        self.gunx.setMinimum(0)
-        self.gunx.setValue(0)
-        self.gunx.setPrefix(" Gun X : ")
-        self.toolbar.addWidget(self.gunx)
-        
-    def initGunY(self):
-        self.guny = QSpinBox(self)
-        self.guny.setMinimum(0)
-        self.guny.setValue(0)
-        self.guny.setPrefix(" Gun Y : ")
-        self.toolbar.addWidget(self.guny)
-        
-    def initGunZ(self):
-        self.gunz = QSpinBox(self)
-        self.gunz.setMinimum(0)
-        self.gunz.setValue(0)
-        self.gunz.setPrefix(" Gun Z : ")
-        self.toolbar.addWidget(self.gunz)
-
-    def initFov(self):
-        self.fov = QSpinBox(self)
-        self.fov.setMinimum(50)
-        self.fov.setMaximum(150)
-        self.fov.setValue(110)
-        self.fov.setPrefix(" DemoFov : ")
-        self.toolbar.addWidget(self.fov)
-
-    def initFrameRate(self):
-        self.framerate = QSpinBox(self)
-        self.framerate.setMinimum(0)
-        self.framerate.setMaximum(250)
-        self.framerate.setValue(25)
-        self.framerate.setPrefix(" FrameRate : ")
-        self.toolbar.addWidget(self.framerate)
-
-    def initHideHud(self):
-        self.hud = QCheckBox()
-        self.hud.setText("Hide Hud")
-        self.hud.setStyleSheet(checkbox_style)
-        self.toolbar.addWidget(self.hud)
-
-    def initNoParams(self):
-        self.a_override = QCheckBox()
-        self.a_override.setText("Avoid Override")
-        self.a_override.setStyleSheet(checkbox_style)
-        self.toolbar.addWidget(self.a_override)
-
-    def initVideoPipe(self):
-        self.pipe = QCheckBox()
-        self.pipe.setText("video-pipe")
-        self.pipe.setStyleSheet(checkbox_style)
-        self.toolbar.addWidget(self.pipe)
-
-    def isHudChecked(self):
-        return True if self.hud.checkState() else False
-
-    def isAvoidOverrideChecked(self):
-        return True if self.a_override.checkState() else False
-
-    def isVideoPipeChecked(self):
-        return True if self.pipe.checkState() else False
 
     def recordAction(self):
-        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), True, self.isHudChecked(), self.settings,
-                   self.isAvoidOverrideChecked(), self.isVideoPipeChecked())
+        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.settingsToolbar.getGunSize(), self.settingsToolbar.getGunx(),
+                   self.settingsToolbar.getGuny(), self.settingsToolbar.getGunz(), self.settingsToolbar.getFov(), self.settingsToolbar.getFramerate(), True, self.settingsToolbar.isHudChecked(), self.settings,
+                   self.settingsToolbar.isAvoidOverrideChecked(), self.settingsToolbar.isVideoPipeChecked())
 
     def playAction(self):
-        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.guns.cleanText(), self.gunx.cleanText(),
-                   self.guny.cleanText(), self.gunz.cleanText(), self.fov.cleanText(), self.framerate.cleanText(), False, self.isHudChecked(), self.settings,
-                   self.isAvoidOverrideChecked(), False)
+        ConfigFile(self.demos.urban, self.demos.path, self.demosLst.getDemosChecked(), self.settingsToolbar.getGunSize(), self.settingsToolbar.getGunx(),
+                   self.settingsToolbar.getGuny(), self.settingsToolbar.getGunz(), self.settingsToolbar.getFov(), self.settingsToolbar.getFramerate(), False, self.settingsToolbar.isHudChecked(), self.settings,
+                   self.settingsToolbar.isAvoidOverrideChecked(), False)
 
     def initRecordButton(self):
         self.record = QPushButton()
