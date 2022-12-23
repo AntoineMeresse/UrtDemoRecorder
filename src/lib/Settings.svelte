@@ -18,7 +18,7 @@
 <div>
   <p>Game Path</p>
   <input bind:value={$urtPath} disabled />
-  {#if $urtPath.length !== 0}
+  {#if $urtPath}
     <button on:click={deletePath}>X</button>
   {:else}
     <button on:click={selectPath}>Select</button>
