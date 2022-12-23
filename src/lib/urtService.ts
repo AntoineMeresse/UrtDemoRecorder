@@ -4,6 +4,7 @@ import { DemoFormats } from "./demos/DemoFormats";
 
 export const urtPath : Writable<string> = writable("");
 export const demoList : Writable<string[]> = writable([]);
+export const demoListSelected : Writable<string[]> = writable(["demo0000.urtdemo"]);
 export const demoNameFilter : Writable<string> = writable("")
 export const demoTypeFilter : Writable<string> = writable(DemoFormats[0])
 

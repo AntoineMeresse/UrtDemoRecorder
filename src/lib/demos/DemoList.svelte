@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { demoList, loadDemosFiles } from "$lib/urtService";
+  import { demoList, loadDemosFiles, demoListSelected } from "$lib/urtService";
   import { onMount } from "svelte";
   import Demo from "./Demo.svelte";
 
@@ -10,8 +10,9 @@
   });
 </script>
 
+<p>Selected list : {$demoListSelected}</p>
 <div>
-  {#each $demoList as demo}
+  {#each $demoList as demo (demo)}
     <Demo demoName={demo} />
   {/each}
 </div>
