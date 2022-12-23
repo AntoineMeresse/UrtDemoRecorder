@@ -1,6 +1,7 @@
 <script>
-  import { urtPath } from "./urtService";
+  import { urtPath, demoTypeFilter } from "./urtService";
   import { open } from "@tauri-apps/api/dialog";
+  import { DemoFormats } from "./demos/DemoFormats";
 
   function deletePath() {
     urtPath.set("");
@@ -23,6 +24,13 @@
   {:else}
     <button on:click={selectPath}>Select</button>
   {/if}
+
+  <p>Format</p>
+  <select bind:value={$demoTypeFilter}>
+    {#each DemoFormats as f}
+      <option value={f}>{f}</option>
+    {/each}
+  </select>
 </div>
 
 <style>

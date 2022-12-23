@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { demoFilter } from "$lib/urtService";
+  import { demoNameFilter } from "$lib/urtService";
   export let demoName: string;
 </script>
 
-{#if !$demoFilter || demoName.includes($demoFilter)}
+{#if !$demoNameFilter || demoName.includes($demoNameFilter)}
   <div>
     <p>{demoName}</p>
   </div>
