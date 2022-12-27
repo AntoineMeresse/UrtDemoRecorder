@@ -2,6 +2,7 @@
   import { urtPath, demoTypeFilter } from "./urtService";
   import { open } from "@tauri-apps/api/dialog";
   import { DemoFormats } from "./demos/DemoFormats";
+  import { open as openProgram } from "@tauri-apps/api/shell";
 
   function deletePath() {
     urtPath.set("");
@@ -13,6 +14,10 @@
         urtPath.set(filepath);
       }
     });
+  }
+
+  function openUrt() {
+    openProgram($urtPath);
   }
 </script>
 
@@ -32,6 +37,8 @@
     {/each}
   </select>
 </div>
+
+<button on:click={openUrt}>Open urt</button>
 
 <style>
   input {
